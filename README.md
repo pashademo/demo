@@ -9,6 +9,7 @@
 - [Контроллеры](#контроллеры)
 - [Маршруты](#маршруты)
 - [Views (Blade)](#views-blade)
+- [6 модуль] (#6модуль)
 
 ---
 
@@ -645,7 +646,7 @@ Route::put('/user/{user}', [App\Http\Controllers\ActionsController::class, 'edit
 </html>
 ```
 
-# 6 модуль
+# 6модуль
 
 ```
 composer create-project laravel/laravel --prefer-dist .
