@@ -658,68 +658,78 @@ php artisan make:controller TestCaseController
 ```
 ### TestCaseController.php:
 ```
-php
 <?php
+
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
+
 class TestCaseController extends Controller
 {
-public function show(Request $request)
-{
-return view('index');
-}
-public function getData()
-{
-$data = file_get_contents('http://localhost:8080/api/fullName');
-if ($data) {
-$data = json_decode($data)->value;
-}
-return redirect()->route('test-case')->with('value', $data);
-}
-public function checkData(Request $request)
-{
-$value = $request->input('value');
-if (preg_match('/^[А-Яа-яЁё]+ [А-Яа-яЁё]+ [А-Яа-яЁё]+$/u', $value)) {
-return redirect()->route('test-case')
-->with('value', $value)
-->with('message', 'ФИО корректно');
-} else {
-return redirect()->route('test-case')
-->with('value', $value)
-->with('message', 'ФИО содержит некорректные символы');
-}
-}
+    public function show(Request $request)
+    {
+        return view('index');
+    }
+
+    public function getData()
+    {
+        $data = file_get_contents('http://localhost:8080/api/fullName');
+
+        if ($data) {
+            $data = json_decode($data)->value;
+        }
+
+        return redirect()->route('test-case')->with('value', $data);
+    }
+
+    public function checkData(Request $request)
+    {
+        $value = $request->input('value');
+
+        if (preg_match('/^[А-Яа-яЁё]+ [А-Яа-яЁё]+ [А-Яа-яЁё]+$/u', $value)) {
+            return redirect()->route('test-case')
+                ->with('value', $value)
+                ->with('message', 'ФИО корректно');
+        } else {
+            return redirect()->route('test-case')
+                ->with('value', $value)
+                ->with('message', 'ФИО содержит некорректные символы');
+        }
+    }
 }
 ```
 
 ### index.blade.php:
 ```
-html
 <p>
-<form action="{{ route('test-case.get') }}">
-<button type="submit">Получить данные</button>
-<span>{{ session('value') }}</span>
-</form>
+    <form action="{{ route('test-case.get') }}">
+        <button type="submit">Получить данные</button>
+        <span>{{ session('value') }}</span>
+    </form>
 </p>
+
 <p>
-<form method="POST" action="{{ route('test-case.check') }}">
-@csrf
-<input type="hidden" name="value" value="{{ session('value') }}">
-<button type="submit">Отправить результаты теста</button>
-<span>{{ session('message') }}</span>
-</form>
+    <form method="POST" action="{{ route('test-case.check') }}">
+        @csrf
+        <input type="hidden" name="value" value="{{ session('value') }}">
+        <button type="submit">Отправить результаты теста</button>
+        <span>{{ session('message') }}</span>
+    </form>
 </p>
 ```
 ### web.php:
 ```
-php
 <?php
+
 use App\Http\Controllers\TestCaseController;
 use Illuminate\Support\Facades\Route;
+
 Route::get('/', [TestCaseController::class, 'show'])
-->name('test-case');
+    ->name('test-case');
+
 Route::get('/get', [TestCaseController::class, 'getData'])
-->name('test-case.get');
+    ->name('test-case.get');
+
 Route::post('/check', [TestCaseController::class, 'checkData'])
-->name('test-case.check');
+    ->name('test-case.check');
 ```
