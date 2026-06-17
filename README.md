@@ -646,6 +646,11 @@ Route::put('/user/{user}', [App\Http\Controllers\ActionsController::class, 'edit
 </html>
 ```
 ### Создание пользователя
+
+### Обновление миграций (Если не создается пользователь)
+```
+php artisan migrate:refresh
+```
 ```
 php artisan tinker
 ```
