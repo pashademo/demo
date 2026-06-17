@@ -1,15 +1,28 @@
-Демо-экзамен КОД 09.02.07-5-2026
-Содержание
-Установка Laravel
-База данных
-Миграции
-Модели
-Контроллеры
-Маршруты
-Views (Blade)
-Установка Laravel
+[README.md](https://github.com/user-attachments/files/29037137/README.md)
+# Демо-экзамен КОД 09.02.07-5-2026
+
+## Содержание
+- [Установка Laravel](#установка-laravel)
+- [База данных](#база-данных)
+- [Миграции](#миграции)
+- [Модели](#модели)
+- [Контроллеры](#контроллеры)
+- [Маршруты](#маршруты)
+- [Views (Blade)](#views-blade)
+
+---
+
+## Установка Laravel
+
+```bash
 composer create-project laravel/laravel --prefer-dist .
-База данных
+```
+
+---
+
+## База данных
+
+```sql
 CREATE TABLE customers (
     id   INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL
@@ -62,8 +75,15 @@ CREATE TABLE order_items (
     FOREIGN KEY (order_id)   REFERENCES orders(id),
     FOREIGN KEY (product_id) REFERENCES products(id)
 );
-Миграции
-create_users_table
+```
+
+---
+
+## Миграции
+
+### create_users_table
+
+```php
 <?php
 
 use Illuminate\Database\Migrations\Migration;
@@ -108,8 +128,15 @@ return new class extends Migration
         Schema::dropIfExists('sessions');
     }
 };
-Модели
-User.php
+```
+
+---
+
+## Модели
+
+### User.php
+
+```php
 <?php
 
 namespace App\Models;
@@ -145,11 +172,22 @@ class User extends Authenticatable
         ];
     }
 }
-Контроллеры
-Создание контроллеров
+```
+
+---
+
+## Контроллеры
+
+### Создание контроллеров
+
+```bash
 php artisan make:controller ActionsController
 php artisan make:controller ViewsController
-ActionsController.php
+```
+
+### ActionsController.php
+
+```php
 <?php
 
 namespace App\Http\Controllers;
@@ -306,7 +344,11 @@ class ActionsController extends Controller
             ->with('status', 'User unlocked successfully.');
     }
 }
-ViewsController.php
+```
+
+### ViewsController.php
+
+```php
 <?php
 
 namespace App\Http\Controllers;
@@ -340,8 +382,15 @@ class ViewsController extends Controller
         ]);
     }
 }
-Маршруты
-web.php
+```
+
+---
+
+## Маршруты
+
+### web.php
+
+```php
 <?php
 
 use Illuminate\Support\Facades\Route;
@@ -392,8 +441,15 @@ Route::post('/user', [App\Http\Controllers\ActionsController::class, 'createUser
 Route::put('/user/{user}', [App\Http\Controllers\ActionsController::class, 'editUser'])
     ->name('user.update')
     ->middleware(['auth']);
-Views (Blade)
-login.blade.php
+```
+
+---
+
+## Views (Blade)
+
+### login.blade.php
+
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -422,7 +478,11 @@ login.blade.php
     </form>
 </body>
 </html>
-change_password.blade.php
+```
+
+### change_password.blade.php
+
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -455,7 +515,11 @@ change_password.blade.php
     </form>
 </body>
 </html>
-index.blade.php
+```
+
+### index.blade.php
+
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -525,7 +589,11 @@ index.blade.php
     @endif
 </body>
 </html>
-user_form.blade.php
+```
+
+### user_form.blade.php
+
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -575,3 +643,4 @@ user_form.blade.php
     @endif
 </body>
 </html>
+```
