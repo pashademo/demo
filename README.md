@@ -652,10 +652,12 @@ Route::put('/user/{user}', [App\Http\Controllers\ActionsController::class, 'edit
 composer create-project laravel/laravel --prefer-dist .
 ```
 ### Контроллеры
+```
 php artisan make:controller TestCaseController
 Удалить welcome.blade.php, создать index.blade.php
-
-TestCaseController.php:
+```
+### TestCaseController.php:
+```
 php
 <?php
 namespace App\Http\Controllers;
@@ -688,7 +690,10 @@ return redirect()->route('test-case')
 }
 }
 }
-index.blade.php:
+```
+
+### index.blade.php:
+```
 html
 <p>
 <form action="{{ route('test-case.get') }}">
@@ -704,7 +709,9 @@ html
 <span>{{ session('message') }}</span>
 </form>
 </p>
-web.php:
+```
+### web.php:
+```
 php
 <?php
 use App\Http\Controllers\TestCaseController;
@@ -715,3 +722,4 @@ Route::get('/get', [TestCaseController::class, 'getData'])
 ->name('test-case.get');
 Route::post('/check', [TestCaseController::class, 'checkData'])
 ->name('test-case.check');
+```
