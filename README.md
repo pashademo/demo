@@ -651,7 +651,7 @@ Route::put('/user/{user}', [App\Http\Controllers\ActionsController::class, 'edit
 ```
 composer create-project laravel/laravel --prefer-dist .
 ```
-
+### Контроллеры
 php artisan make:controller TestCaseController
 Удалить welcome.blade.php, создать index.blade.php
 
