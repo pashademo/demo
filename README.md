@@ -646,7 +646,7 @@ Route::put('/user/{user}', [App\Http\Controllers\ActionsController::class, 'edit
 </html>
 ```
 
-# 6модуль
+## 6 модуль
 
 ```
 composer create-project laravel/laravel --prefer-dist .
