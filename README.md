@@ -77,7 +77,18 @@ CREATE TABLE order_items (
     FOREIGN KEY (product_id) REFERENCES products(id)
 );
 ```
-
+## Запрос к БД (3 модуль)
+---
+SELECT
+    o.id AS order_id,
+    SUM(oi.quantity * sm.quantity * m.price) AS total_cost
+FROM orders o
+JOIN order_items oi ON oi.order_id = o.id
+JOIN specifications s ON s.product_id = oi.product_id
+JOIN specification_materials sm ON sm.specification_id = s.id
+JOIN materials m ON sm.material_id = m.id
+GROUP BY o.id;
+---
 ---
 
 ## Миграции
